@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box1{
+            background:#625772;
+            border-radius: 50%;
+            width:100px;
+            height:100px;
+            position:absolute;
+            left:0px;
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var iSpeed=0;
+    //var timer=null;
+    function startMove(){
+        var oDiv= document.getElementsByClassName("box1")[0];
+        //clearInterval(timer);
+        timer=setInterval(function(){
+            iSpeed+=(300-oDiv.offsetLeft)/5;
+            iSpeed*=0.7;//摩擦力系数
+            oDiv.style.left=oDiv.offsetLeft+iSpeed+'px';
+        },30)
+    }
+
+</script>
+<div id="box"><div>
+    <input value="开始运动" type="button" onclick="startMove()">
+    <div class="box1"></div>
+</body>
+</html>
+

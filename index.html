@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>我的插件</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" media="all"/>
+    <style type="text/css">
+        html{
+            background: #FFDE7D;
+        }
+        .wrap {
+            width: 500px;
+            font-size: 22px;
+            margin: 20px auto 0;
+            padding: 40px 20px;
+        }
+        .list {
+            padding: 0 60px;
+
+        }
+
+        .list li {
+            list-style: none;
+            line-height: 50px;
+            /*border-bottom: 1px solid #f2f2f2;*/
+        }
+
+        .list li h1 {
+            font-size: 22px;
+            font-style: normal;
+            font-family: "Hiragino Sans GB", "Hiragino Sans GB W3", '微软雅黑';
+        }
+
+        .list li a {
+            display: block;
+            padding: 5px 8px;
+            color:#00B8A9;
+            transition: all 0.6s;
+        }
+
+        .list li a:hover {
+            border-radius: 5px;
+            color: #48466D;
+            text-decoration: none;
+        }
+        .list li h1 a{
+            color: #00B8A9;
+        }
+        .list li h1 a:hover {
+            border-radius: 5px;
+            color: #48466D;
+            opcity: 0.5;
+            text-decoration: none;
+        }
+
+        .sub-dl {
+            display: none;
+        }
+
+        .sub-dl a {
+            margin-left: 25px;
+        }
+
+        .sub-dl a:hover {
+        }
+
+    </style>
+</head>
+<body>
+<!--http://1.gitapp.sinaapp.com/base/-->
+<div class="wrap shadow">
+    <ol id="ol" class="list">
+
+    </ol>
+</div>
+<script type="text/javascript">
+    var str = '',
+            data = [
+                [
+                    {title: '一. 响应式表单'},
+                    {url: '响应式表单/index.html', title: '响应式表单'},
+                ],
+                [
+                    {title: '二 下拉导航菜单'},
+                    {url: '下拉列表/index.html', title: 'css3实现的下拉导航菜单'}
+                ],
+                [
+                    {title: '三 轮播图'},
+                    {url: '轮播专题/1.无缝滚动.html', title: '无缝滚动'},
+                    {url: '轮播专题/2.单页滚动.html', title: '单页滚动'},
+                    {url: '轮播专题/3.整页滚动.html', title: '多页滚动'},
+                ],
+                [
+                    {title: '四 表格常见效果'},
+                    {url: '表格常见效果/01.表格-隔行变色.html', title: '表格隔行变色'},
+                    {url: '表格常见效果/02-悬停变色.html', title: '表格悬停变色'},
+                    {url: '表格常见效果/03-表格升降排序.html', title: '表格升降排序'},
+                ],
+                [
+                    {title: '五 运动专题'},
+                    {url: '常见的运动专题/弹性运动.html', title: '弹性运动'},
+                    {url: '常见的运动专题/拖拽与碰撞运动.html', title: '拖拽与碰撞运动'},
+                    {url: '常见的运动专题/缓冲运动.html', title: '缓冲运动'}
+                ]
+//                ,
+//                [
+//                    {title: '六 运动专题'},
+//                    {url: 'd/03/index.html', title: '全日历'},
+//                    {url: 'd/04/index.html', title: 'canvas实现小时钟'}
+//                ]
+            ];
+    for (var i = 0; i < data.length; i++) {
+        var items = data[i];
+        var sub = '';
+        for (var j = 0; j < items.length; j++) {
+            var son = items[j];
+            if (j == 0) {
+                sub += '<li><h1><a href="javascript:;" title="' + son.title + '">' + son.title + '</a></h1><dl class="sub-dl">';
+            } else {
+                sub += '<dd><a href="' + son.url + '" target="_blank" title="' + son.title + '">' + son.title + '</a></dd>';
+            }
+            if (j == items.length - 1) {
+                sub += '</dl></li>';
+            }
+        }
+        str += sub;
+    }
+    var ol = document.getElementById('ol');
+    ol.innerHTML = str;
+    var h1 = ol.getElementsByTagName('h1');
+    var dl = ol.getElementsByTagName('dl');
+    var tmp = -1;
+    var open = false;
+    for (var i = 0; i < h1.length; i++) {
+        h1[i].index = i;
+        h1[i].onclick = function () {
+            for (var i = 0; i < h1.length; i++) {
+                dl[i].style.display = 'none';
+            }
+            if (tmp == this.index && open) {
+                dl[this.index].style.display = 'none';
+                open = false;
+            } else {
+                dl[this.index].style.display = 'block';
+                open = true;
+            }
+            tmp = this.index;
+        }
+    }
+</script>
+</body>
+</html>

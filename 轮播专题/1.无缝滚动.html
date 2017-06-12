@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;padding:0;
+        }
+        #div1{
+            position: relative;border: 1px solid #000000;width:880px;height:180px;margin:0 auto;
+            overflow: hidden;
+        }
+        #div1 ul{
+            position: absolute;left:0;
+        }
+        #div1 ul li{
+            list-style: none;float: left;width:200px;height:160px;padding:10px;
+        }
+        #div1 ul li img{
+            width:200px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById("div1");
+            var oUl=oDiv.getElementsByTagName("ul")[0];
+            var aLi=oUl.getElementsByTagName("li");
+            var timer=null;
+
+            oUl.innerHTML+=oUl.innerHTML;
+            oUl.style.width=aLi.length*aLi[0].offsetWidth+'px';
+
+            timer=setInterval(fnMove,30);
+
+            //无缝滚动
+            function fnMove(){
+                if(oUl.offsetLeft<-oUl.offsetWidth/2){
+                    oUl.style.left=0;
+                }
+                oUl.style.left=oUl.offsetLeft-5+"px";
+            }
+
+            //鼠标移入暂停
+            oDiv.onmouseover=function(){
+                clearInterval(timer);
+            };
+            oDiv.onmouseout=function(){
+               timer =setInterval(fnMove,30);
+            }
+        };
+    </script>
+</head>
+<body>
+<div id="div1">
+    <ul>
+        <li><img src="img/5.jpg" alt="1"></li>
+        <li><img src="img/6.jpg" alt="1"></li>
+        <li><img src="img/7.jpg" alt="1"></li>
+        <li><img src="img/8.jpg" alt="1"></li>
+    </ul>
+</div>
+</body>
+</html>

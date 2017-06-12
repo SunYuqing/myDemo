@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+            background-color: #625772;
+            position:absolute;
+            top:40px;
+            left:0px;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="缓冲运动" onclick="startMove(300)">
+<div id="div1"></div>
+<span style="width:1px;height:300px;background: black;position:absolute;left: 300px;;top:0;"></span>
+<script>
+    var timer=null;
+    var oDiv = document.getElementById("div1");
+    function startMove(iTarget){
+        clearInterval(timer);
+        timer=setInterval(
+                function(){
+                    var speed=(iTarget-oDiv.offsetLeft)/8;
+                    speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                    if(oDiv.offsetLeft>=iTarget){
+                        clearInterval(timer);
+                    }else{
+
+                        oDiv.style.left=oDiv.offsetLeft+speed+'px';
+                    }
+                },30
+        );
+    }
+</script>
+</body>
+</html>

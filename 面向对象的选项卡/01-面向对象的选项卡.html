@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+		html,body{
+			width: 100%;
+			height: 100%;
+			padding:0;
+			margin:0;
+		}
+		#tab {
+			width: 200px;
+			margin: 100px auto;
+		}
+        #tab input{
+            background: #cccccc;
+       }
+        #tab .active{
+            background: yellow;
+        }
+        #tab div{
+            width:200px;height:100px;background: #eee;display: none;
+        }
+
+    </style>
+    <script>
+        window.onload=function(){
+			var oTab=new TabSwitch('tab');
+        }
+        function TabSwitch(id){
+            var oDiv=document.getElementById(id);
+            this.aBtn=oDiv.getElementsByTagName("input");
+            this.aDiv=oDiv.getElementsByTagName("div");
+            var i;
+            var that=this;
+			console.log(this);
+            for(i=0;i<this.aBtn.length;i++){
+                this.aBtn[i].index=i;
+                this.aBtn[i].onclick=function(){
+//					console.log(this);
+                    that.tab(this);
+                }
+            }
+        }
+        TabSwitch.prototype.tab=function(oBtn){
+            for(i=0;i<this.aBtn.length;i++){
+                this.aBtn[i].className="";
+                this.aDiv[i].style.display='none';
+            }
+            this.aDiv[oBtn.index].style.display="block";
+			oBtn.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+<div id="tab">
+    <input type="button" value="教育" >
+    <input type="button" value="体育" >
+    <input type="button" value="娱乐" >
+    <div>教育教学</div>
+    <div>德智体美劳全面发展</div>
+    <div>要有娱乐精神</div>
+</div>
+</body>
+</html>
